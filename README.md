@@ -14,7 +14,7 @@
 This repository re-derives, step by step, a published one-loop quantum gravity calculation during inflation:
 the graviton correction to a massless, minimally coupled scalar on de Sitter space
 ([Paper I](#papers), Phys. Rev. D 76, 124005 (2007)), and its use in the scalar's late-time field equation
-([Paper II](#papers), arXiv:0710.5282). The re-derivation was carried out with Claude (Anthropic's AI model,
+([Paper II](#papers), Phys. Rev. D 77, 084012 (2008)). The re-derivation was carried out with Claude (Anthropic's AI model,
 Claude Opus 5.5) as a checking tool. It was published by E. O. Kahya, one of the authors of both papers.
 Each step, from the Feynman rules (I.6)–(I.8) to the renormalized self-mass (I.167) and the late-time analysis of Paper II,
 was derived again from the inputs stated in the papers, keeping the dimension $`D`$ general wherever the paper does, and
@@ -341,7 +341,7 @@ If you use this re-derivation, please cite the paper above (arXiv identifier to 
   year         = {2026},
   howpublished = {\url{https://github.com/eokahya/claude-audits-quantum-gravity}},
   note         = {Step-by-step re-derivation of the one-loop scalar self-mass during inflation
-                  (Phys. Rev. D 76, 124005) and of its late-time effect (arXiv:0710.5282),
+                  (Phys. Rev. D 76, 124005) and of its late-time effect (Phys. Rev. D 77, 084012),
                   carried out with Claude Opus 5.5}
 }
 ```

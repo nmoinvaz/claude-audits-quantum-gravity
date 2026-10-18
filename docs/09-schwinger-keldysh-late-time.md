@@ -3,7 +3,7 @@
 <sub>[Overview (README)](../README.md) · Previous: [Renormalized self-mass and Table X](08-renormalized-self-mass-table-X.md) · Next: [Complete list of findings](10-complete-list-of-findings.md)</sub>
 
 *Task 18 of the re-derivation. Paper II: E. O. Kahya and R. P. Woodard, "Scalar Field Equations from Quantum Gravity
-during Inflation", arXiv:0710.5282.*
+during Inflation", Phys. Rev. D 77, 084012 (2008), arXiv:0710.5282.*
 
 ## What this step computes
 

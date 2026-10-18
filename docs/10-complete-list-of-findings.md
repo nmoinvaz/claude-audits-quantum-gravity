@@ -7,8 +7,8 @@ This page lists every result of the re-derivation of two papers:
 - **Paper I**: E. O. Kahya and R. P. Woodard, Phys. Rev. D 76, 124005 (2007). It computes the one-loop quantum-gravity
   self-mass-squared of a massless, minimally coupled scalar on de Sitter space, in the gauge (I.15), which is not de Sitter
   invariant.
-- **Paper II**: E. O. Kahya and R. P. Woodard, arXiv:0710.5282. It uses that self-mass in the Schwinger–Keldysh mode equation
-  and studies the late-time behaviour of the scalar mode function.
+- **Paper II**: E. O. Kahya and R. P. Woodard, Phys. Rev. D 77, 084012 (2008), arXiv:0710.5282. It uses that self-mass in
+  the Schwinger–Keldysh mode equation and studies the late-time behaviour of the scalar mode function.
 
 The work was done step by step in 18 tasks, with Claude Opus 5.5 (Anthropic) as a checking tool. Each item below points to
 the chapter of the [derivation notes](../notes/notes.pdf) where it is derived and to the scripts in [`code/`](../code/) that
