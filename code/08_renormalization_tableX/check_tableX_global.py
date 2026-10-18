@@ -17,9 +17,11 @@ Printed for each point: LHS - Table X (as printed); the same after adding 8 ln x
 ("72 gamma2", the Table V inconsistency found in Task 13).
 Expected result: nonzero differences for the printed table and with the zeta fix alone; differences of
 order 1e-31 (zero to working precision) when both corrections are applied.
+Usage: python3 check_tableX_global.py [SEED].  SEED draws the three point pairs and defaults to 29, the
+seed of the original Task 17 run; another seed repeats the test at three new pairs.
 Requires check_global.py in the same folder.  Runtime: about 16 s (Python 3.10+, SymPy 1.14).
 """
-import sympy as sp, random
+import sympy as sp, random, sys
 from check_global import run, Y, H, R
 A = 4/Y - 2*sp.log(Y/4) - 1; B = 4/Y; C = 4/Y; dC = 4*(C - A)          # units h = H^2/(16 pi^2)
 T, ops_unused, direct, opsum, geo = run(4, A, B, dC, 'D=4', pts=0)
@@ -56,7 +58,7 @@ def apply(pref, nB, nL, f):
 paper_sum = sum(apply(*v) for v in rows.values())
 fix_zeta = apply((a*ap)**2, 0, 2, 8*lx - 16*x*lx)
 fix_72 = apply((a*ap)**3*s2*H**4, 0, 0, sp.Integer(72))
-random.seed(29)
+random.seed(int(sys.argv[1]) if len(sys.argv) > 1 else 29)
 pts = []
 while len(pts) < 3:
     pt = {H: random.choice([R(7, 10), R(13, 10), R(3, 2)]), t: -R(random.randint(3, 9), 4), tp: -R(random.randint(10, 19), 4)}

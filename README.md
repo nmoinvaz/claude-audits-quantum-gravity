@@ -225,7 +225,7 @@ cd claude-audits-quantum-gravity
 pip install -r code/requirements.txt      # sympy, mpmath
 
 python3 code/run_all.py --quick           # all but the two slowest scripts, about 6 minutes
-python3 code/run_all.py                   # everything (38 runs), about 10 minutes
+python3 code/run_all.py                   # everything (39 runs), about 10 minutes
 python3 code/run_all.py --folder 08       # one folder
 ```
 

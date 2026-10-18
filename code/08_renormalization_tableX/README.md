@@ -17,10 +17,12 @@ cd code/08_renormalization_tableX
 python3 check_146_IX.py         # ~3 s
 python3 check_160_167.py        # ~2 s
 python3 check_tableX_global.py  # ~17 s (imports check_global.py from this folder)
+python3 check_tableX_global.py 1  # ~17 s, the same test at three other point pairs (seed 1)
 python3 check_global.py         # ~14 s (optional: the helper's own Task 13 self-test)
 ```
 
-The output of each script is stored in `expected_output/<script>.txt`.
+The output of each script is stored in `expected_output/<script>.txt`. The seed-1 run of `check_tableX_global.py` is stored
+in `expected_output/check_tableX_global_N1.txt`.
 
 ## Scripts
 
@@ -28,7 +30,7 @@ The output of each script is stored in `expected_output/<script>.txt`.
 |---|---|---|---|
 | `check_146_IX.py` | 16 | (A) pointwise parts and residues of (148)–(150) and the delta coefficient of (147); (B) the "add zero" step (151) and the D→4 expansions (152), (153); (C) flat Euclidean analogue of (151), exact in D; (D) Table VI from Table IV for general D; (E) Table VII; (F) the kernel identities (154), (155) and six simpler a′→a conversions on a test function; (G) Tables VIII and IX, rows and totals; (H) (156)–(159); (I) flat-space loop numerator V·P·V = p²k²/2 | ~3 s |
 | `check_160_167.py` | 17 | (A) Table X assembled from Tables III, V, VII and (159); (B) pointwise identities used in the global test; (C) β₁, β₂, β₃ of (161)–(165) for general D and at D = 4, with the corrected and definition-sign values | ~2 s |
-| `check_tableX_global.py` | 17 | Global pointwise test at D = 4: direct sum of the normal contributions P₁…P₇ plus the nonlocal term of (67) versus the 13 operators of Table X, at three points with 30 digits; printed table, with the ζ-row fix, and with ζ-row fix plus 72γ₂ | ~17 s |
+| `check_tableX_global.py` | 17 | Global pointwise test at D = 4: direct sum of the normal contributions P₁…P₇ plus the nonlocal term of (67) versus the 13 operators of Table X, at three points with 30 digits; printed table, with the ζ-row fix, and with ζ-row fix plus 72γ₂. An optional argument sets the seed of the points (default 29) | ~17 s |
 | `check_global.py` | 13 (helper) | Helper module providing `run(...)`, which builds P₁…P₇ by brute-force differentiation and the ten external operators acting on the appendix totals. Run on its own, it repeats the Task 13 generic-power self-test (diff = 0.0) | ~14 s |
 
 ## What the outputs mean
@@ -41,6 +43,8 @@ The output of each script is stored in `expected_output/<script>.txt`.
 - (C): reproduces −61/3 and −4/(D−4) + 58/3 + 2γ (`e` stands for D−4). It also gives the corrected values −49/3 and −4/(D−4) + 52/3 + 2γ (paper convention) and the definition-sign values, which are −1 times these.
 
 **`check_tableX_global.txt`**: one line per point. The differences "lhs − TableX(printed)" (−11.5, 64.1, −3.53) and "+ zeta fix" (1.18, 65.3, 0.016) are nonzero. "+ zeta + 72 gamma2" gives about 1e-31, i.e. zero at 30-digit precision. So Table X is reproduced only when **both** corrections are applied.
+
+**`check_tableX_global_N1.txt`**: the same test at three new point pairs (seed 1). The printed table gives 1.16, 0.0102 and 0.0793, the ζ fix alone 1.23, 0.0106 and 0.0826, and both corrections at most 2e-31. This output was added after the original runs and was produced with Python 3.10.0, SymPy 1.14.0 and mpmath 1.3.0 on Windows.
 
 **`check_global.txt`**: four lines with `diff = 0.0`. This is the Task 13 self-test of the helper.
 

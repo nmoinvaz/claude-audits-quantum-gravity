@@ -6,7 +6,9 @@ The scripts **check** derivations that were first done analytically. They do not
 Finding IDs such as S2 or C5 below refer to the [complete list of findings](../docs/10-complete-list-of-findings.md).
 
 Every script runs on its own from its folder, prints its results, and has a stored output in `expected_output/`. That stored
-output is identical to the output recorded when the calculation was originally carried out.
+output is identical to the output recorded when the calculation was originally carried out. The one exception is
+`08_renormalization_tableX/expected_output/check_tableX_global_N1.txt`, which was added later to repeat the Table X test at
+three new point pairs.
 
 ## Requirements
 
@@ -23,7 +25,7 @@ mathematics is the same, but an expression may be printed in a different (equiva
 From the repository root (inside `code/`, drop the `code/` prefix):
 
 ```bash
-python3 code/run_all.py              # all 38 runs, about 10 minutes on an Apple-silicon laptop
+python3 code/run_all.py              # all 39 runs, about 10 minutes on an Apple-silicon laptop
 python3 code/run_all.py --quick      # skip the two scripts that take more than 60 s (about 6 minutes)
 python3 code/run_all.py --folder 06  # one folder; repeat the option for several (--folder 02 --folder 08)
 python3 code/run_all.py --list       # show the runs and their estimated runtimes without running anything
@@ -52,8 +54,9 @@ failures, in 10.1 minutes of wall time.
 1. Every `*.py` file whose stem has a stored output `expected_output/<stem>.txt` is run as
    `cd NN_slug && python3 <stem>.py`, with the same interpreter that runs `run_all.py`.
 2. A script with stored outputs of the form `expected_output/<stem>_N<n>.txt` takes an argument. It is run once for each `n`.
-   This applies only to `09_schwinger_keldysh/kexp.py`, which is run as `python3 kexp.py 2`, `4`, `6` and `10`, as in that
-   folder's `run_all.sh`.
+   This applies to `09_schwinger_keldysh/kexp.py`, which is run as `python3 kexp.py 2`, `4`, `6` and `10`, as in that
+   folder's `run_all.sh`. It also applies to `08_renormalization_tableX/check_tableX_global.py`, which is run once without
+   an argument (seed 29) and once as `python3 check_tableX_global.py 1` (seed 1).
 3. A script without any stored output is a helper module that other scripts import (`engine.py` and `rows.py` in
    `09_schwinger_keldysh`). It is run as well, and it must exit cleanly and print nothing.
    Conversely, a stored output whose script is missing is reported as `ERROR`, so no stored output is skipped silently.

@@ -277,7 +277,9 @@ This test is the evidence for S2 and S3 (Ch. 8,
 | with the $`\zeta`$ correction (S2) only | $`1.182`$ | $`65.28`$ | $`0.0161`$ |
 | with the $`\zeta`$ and $`72\gamma_2`$ corrections (S2 and S3) | $`4\times10^{-31}`$ | $`0`$ | $`-3\times10^{-31}`$ |
 
-Neither correction alone is enough. The test is numerical, at sample points; it is not a symbolic identity.
+Neither correction alone is enough. The test is numerical, at sample points; it is not a symbolic identity. Run with seed 1
+(`python3 check_tableX_global.py 1`), it gives the same pattern at three new pairs: residuals 1.16, 0.0102 and 0.0793 as
+printed, 1.23, 0.0106 and 0.0826 with S2 only, and at most $`2\times10^{-31}`$ with S2 and S3.
 
 ---
 

@@ -12,6 +12,8 @@ Special cases
     * ``09_schwinger_keldysh/kexp.py`` takes the expansion order N as its argument.  It is run once for
       every stored file ``expected_output/kexp_N<N>.txt`` (N = 2, 4, 6, 10), as in that folder's
       ``run_all.sh``.
+    * ``08_renormalization_tableX/check_tableX_global.py`` takes an optional seed.  It is run without one
+      (``check_tableX_global.txt``, seed 29) and once more with seed 1 (``check_tableX_global_N1.txt``).
     * Helper modules without a stored output (``engine.py`` and ``rows.py`` in ``09_schwinger_keldysh``)
       are executed as well; they must exit cleanly and print nothing.
     * A stored output whose script is missing is reported as ``ERROR`` instead of being skipped.
@@ -26,7 +28,7 @@ Comparison
     equivalent expression in a different form, which shows up here as a mismatch (see the diff).
 
 Usage (from the repository root or from ``code/``)
-    python3 code/run_all.py               # everything: 38 runs, about 10 minutes on a laptop
+    python3 code/run_all.py               # everything: 39 runs, about 10 minutes on a laptop
     python3 code/run_all.py --quick       # skip the two scripts that take longer than 60 s (about 6 minutes)
     python3 code/run_all.py --folder 09   # one folder (can be repeated: --folder 02 --folder 08)
     python3 code/run_all.py --list        # show what would be run, with estimated runtimes
@@ -78,6 +80,7 @@ RUNTIME_ESTIMATE: dict[str, float] = {
     "08_renormalization_tableX/check_160_167.py": 2,
     "08_renormalization_tableX/check_global.py": 13,
     "08_renormalization_tableX/check_tableX_global.py": 17,
+    "08_renormalization_tableX/check_tableX_global.py 1": 17,
     "09_schwinger_keldysh/analysis2.py": 10,
     "09_schwinger_keldysh/analysis3.py": 11,
     "09_schwinger_keldysh/engine.py": 0.2,
@@ -147,20 +150,20 @@ def collect_jobs(folder: Path) -> list[Job]:
     used: set[str] = set()
     for script in sorted(folder.glob("*.py")):
         stem = script.stem
-        if f"{stem}.txt" in expected:
+        plain = f"{stem}.txt" in expected
+        if plain:
             jobs.append(Job(folder.name, script.name, [], exp_dir / f"{stem}.txt"))
             used.add(f"{stem}.txt")
-            continue
+        # A script can have both a plain output and outputs with an argument (check_tableX_global.py).
         params = sorted(
             (int(m.group("n")), name)
             for name in expected
             if (m := PARAM_FILE.match(name)) and m.group("stem") == stem
         )
-        if params:
-            for n, name in params:
-                jobs.append(Job(folder.name, script.name, [str(n)], exp_dir / name))
-                used.add(name)
-        else:
+        for n, name in params:
+            jobs.append(Job(folder.name, script.name, [str(n)], exp_dir / name))
+            used.add(name)
+        if not plain and not params:
             jobs.append(Job(folder.name, script.name, [], None))  # helper module
     # A stored output without its script is not silently ignored: it becomes a job for the missing
     # script, which then fails with ERROR ("can't open file ...").
